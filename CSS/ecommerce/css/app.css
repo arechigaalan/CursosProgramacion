@@ -1,0 +1,45 @@
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+/*! Globales */
+
+a {
+    text-decoration: none;
+    color: #000000;
+}
+
+.contenedor {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/*! Header y navegación*/
+.nombre-sitio {
+    margin: 50px 0px;
+    text-align: center;
+}
+
+.nombre-sitio span {
+    color: #037bc0;
+}
+
+.contenedor-navegacion {
+    border-top: 1px solid #E1E1E1;
+}
+
+.navegacion-principal {
+    padding: 20px 0px;
+    display: flex;
+}
+
+.hero {
+    background-image: url('../images/principal.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 550px;
+}
