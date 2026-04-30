@@ -99,3 +99,9 @@ img {
     grid-template-columns: repeat(3, 1fr);
     gap: 5rem; /*! Crea una separación entre cada fila y columna */
 }
+
+/*! Sobre nosotros */
+
+.sobre-nosotros {
+    background-image: linear-gradient(to right, transparent 50%, #037BC0 50%, #037BC0 100%), url('../images/nosotros.jpg');
+}
