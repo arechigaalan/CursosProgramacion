@@ -1,74 +1,61 @@
-from turtle import Turtle as T, Screen as S
-from random import randint as r
+from turtle import Turtle, Screen
+import random
 
-t1 = T("turtle") 
-t2 = T("turtle")
-t3 = T("turtle")
-t4 = T("turtle")
-t5 = T("turtle")
-t6 = T("turtle")
-s = S()
+screen = Screen()
+screen.setup(width=500, height=400)
+user_bet = screen.textinput('Make your bet', 'Wich turtle will win the race? Enter a color: ') 
 
-COLORES = ["red", "orange", "yellow", "green", "blue", "purple"]
-LISTADO_TORTUGAS = [t1, t2, t3, t4, t5, t6]
-posiciones = [-240, -240, -240, -240, -240, -240]
-s.setup(500, 500)
+COLORS = ['red', 'green', 'purple', 'blue', 'pink', 'gray']
 
-def dibujar_meta():
-    t1.hideturtle()
-    t1.penup()
-    t1.goto(200, -150)
-    t1.pendown()
-    t1.goto(200, 200)
-    t1.penup()
-    t1.home()
-    t1.showturtle()
+def create_turtles():
+    turtles = []
+    random.shuffle(COLORS)
+    for color in COLORS:
+        t = Turtle('turtle')
+        t.color(color)
+        turtles.append(t)
+    return turtles
 
-def set_colores(tortugas):
-    for i, tortuga in enumerate(tortugas):
-        tortuga.color(COLORES[i])
+def turtle_positions(turtles):
+    y = 175
+    for i, turtle in enumerate(turtles):
+        turtle.penup()
+        turtle.goto(-220, y - ((i + 1) * 50))
 
-def colocar_tortugas(tortugas):
-    posicion = -100
-    for tortuga in tortugas:
-        tortuga.penup()
-        tortuga.goto(-240, posicion)
-        posicion += 50
+def create_finishing_line():
+    t = Turtle('turtle')
+    t.speed("slowest")
+    t.penup()
+    t.goto(220, 180)
+    t.pendown()
+    t.goto(220, -180)
+    t.hideturtle()
 
-def avance_aleatorio(tortugas):
-    for i, tortuga in enumerate(tortugas):
-        avance = r(10, 20)
-        tortuga.fd(avance)
-        actualizar_posicion(i, avance)
+def avance(turtles):
+    for turtle in turtles:
+        turtle.goto(turtle.xcor() + random.randint(1, 10), turtle.ycor())
 
-def actualizar_posicion(posicion, avance):
-    posiciones[posicion] += avance
-
-def hay_ganador(posiciones):
-    for i, posicion in enumerate(posiciones):
-        if posicion >= 200:
-            return True, i
+def winner(turtles):
+    for turtle in turtles:
+        if turtle.xcor() > 220:
+            ganador = turtle.color()
+            return True, ganador
     return False, None
 
-def main():
-    dibujar_meta()
-    set_colores(LISTADO_TORTUGAS)
-    colocar_tortugas(LISTADO_TORTUGAS)
-    user_bet = s.textinput("Make your bet", "Wich turtle will win the race? Enter a color: ")
-    def revisar_apuesta(guess, turtle):
-        return guess.lower() == turtle.lower()
+def race():
+    turtles = create_turtles()
+    turtle_positions(turtles)
+    create_finishing_line()
     while True:
-        ganador, posicion = hay_ganador(posiciones) 
-        if ganador:
-            tortuga_ganadora = COLORES[posicion]
-            print(f"The winer is: {tortuga_ganadora}")
-            if revisar_apuesta(user_bet, tortuga_ganadora):
-                print("You win!")
-            else: 
-                print("You lost!")
+        avance(turtles)
+        hay_ganador, color = winner(turtles)
+        if hay_ganador:
+            if user_bet == color[0]:
+                print(f'You win. The winner was {color[0]}')
+            else:
+                print(f'You lost. The winner was {color[0]}')
             break
-        else:
-            avance_aleatorio(LISTADO_TORTUGAS)
-    s.exitonclick()
 
-main()
+race()
+
+screen.exitonclick()
