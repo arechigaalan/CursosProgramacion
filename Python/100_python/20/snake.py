@@ -36,4 +36,11 @@ class Snake():
     def down(self):
         if self.head.heading() != 90:
             self.head.setheading(270)
+
+    def add_segment(self):
+        segment = Turtle('square')
+        segment.color('white')
+        segment.penup()
+        segment.goto(self.segments[-1].pos())
+        self.segments.append(segment)
     
