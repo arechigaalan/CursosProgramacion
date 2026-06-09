@@ -44,3 +44,12 @@ class Snake():
         segment.goto(self.segments[-1].pos())
         self.segments.append(segment)
     
+    def reset(self):
+        self.ocultar_segmentos()
+        self.segments.clear()
+        self.create_snake()
+        self.head = self.segments[0]
+    
+    def ocultar_segmentos(self):
+        for segment in self.segments:
+            segment.hideturtle()
