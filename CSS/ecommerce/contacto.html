@@ -27,11 +27,10 @@
         </nav>
     </div>
 
-
     <main class="contenedor contenedor-principal">
         <h2 class="text-center">Contacto</h2>
 
-        <form action="">
+        <form class="formulario">
             <fieldset>
                 <legend>Datos personales</legend>
                 <div class="campo">
@@ -54,7 +53,7 @@
                     <input type="tel" id="telefono" placeholder="Teléfono">
                 </div>
 
-                <div>
+                <div class="campo">
                     <label for="mensaje">Mensaje:</label>
                     <textarea id="mensaje" rows="10"></textarea>
                 </div>
@@ -81,15 +80,28 @@
 
                 <div class="campo">
                     <label for="cliente">Cliente</label>
-                    <input type="radio" id="cliente" name="tipo">
+                    <input type="radio" id="cliente" name="tipo" value="cliente">
                 </div>
 
                 <div class="campo">
                     <label for="proveedor">Proveedor</label>
-                    <input type="radio" id="proveedor" name="tipo">
+                    <input type="radio" id="proveedor" name="tipo" value="proveedor">
+                </div>
+
+                <div class="campo">
+                    <label for="categoria">Categoría de Interés</label>
+                    <input list="categorias" name="categorias">
+                    <datalist id="categorias">
+                        <option value="Cocina">
+                        <option value="Exterior">
+                        <option value="Recamaras">
+                        <option value="Oficina">
+                        <option value="Television">
+                    </datalist>
                 </div>
             </fieldset>
             
+            <input type="submit" value="Enviar">
         </form>
     </main>
     

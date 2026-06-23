@@ -13,7 +13,7 @@ data = pd.read_csv('./50_states.csv')
 score = 0
 states_guessed = []
 all_states = data.state.to_list()
-left_states = []
+
 while score < 50:
     answer = s.textinput(f'{score}/50 States Correct', prompt='What\'s another state\'s name')
     if not data[data.state == answer].empty:
@@ -26,11 +26,9 @@ while score < 50:
         states_guessed.append(state)
         score += 1
     if answer == 'exit':
-        for st in all_states:
-            if st not in states_guessed:
-                left_states.append(st)
-                df = pd.DataFrame(left_states)
-                df.to_csv('left_states.csv')
+        left_states = [st for st in all_states if st not in states_guessed]
+        df = pd.DataFrame(left_states)
+        df.to_csv('left_states.csv')
         break
 
 s.exitonclick()
