@@ -78,7 +78,7 @@ h1, h2 {
     flex-direction: column-reverse;
 }
 
-/*! */
+/*! 3 */
 .d-flex-3 {
     display: flex;
     justify-content: space-around;
@@ -89,4 +89,42 @@ h1, h2 {
     display: flex;
     flex-direction: column;
     height: 100rem;
+}
+
+.d-flex-5 {
+    display: flex;
+    height: 70rem;
+    align-items: flex-start;
+}
+
+.d-flex-6 {
+    display: flex;
+    flex-direction: column;
+    height: 80rem;
+    align-items: flex-start;
+}
+
+.d-flex-7 {
+    display: flex;
+    flex-direction: column;
+    height: 80rem;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+.d-flex-8 {
+    display: flex;
+}
+
+.d-flex-8 .box {
+    flex-basis: 33.3%;
+}
+
+.d-flex-9 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.d-flex-9 .box {
+    flex-basis: calc(33.3% - 1rem);
 }
