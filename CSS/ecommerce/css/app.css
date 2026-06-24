@@ -56,10 +56,12 @@ img {
     padding: 1rem;
     transition: background-color 0.3s ease-out;
     text-align: center;
+    border: none;
 }
 
 .btn:hover {
     background-color: #769C02;
+    cursor: pointer;
 }
 
 /*! Utilidades */
@@ -345,3 +347,9 @@ img {
     flex-basis: 10rem; /*! Con flex, basis le da un ancho al label de 100px*/
 }
 
+.campo input:not([type=radio]), /*! Todos menos el tipo radio */ 
+.campo textarea,
+.campo select {
+    flex: 1; /*! Hace que el input tome todo el espacio disponible */
+    border: 0.1rem solid #E1E1E1;
+}
