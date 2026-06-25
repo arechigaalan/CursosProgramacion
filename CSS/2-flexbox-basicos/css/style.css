@@ -128,3 +128,52 @@ h1, h2 {
 .d-flex-9 .box {
     flex-basis: calc(33.3% - 1rem);
 }
+
+.d-flex-10 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.d-flex-10 .box {
+    flex-basis: calc(33.33% - 1rem);
+}
+
+.d-flex-11 {
+    display: flex;
+    gap: 2rem;
+}
+
+.d-flex-11 .box:nth-child(1) {
+    flex-grow: 1;
+}
+
+.d-flex-11 .box:nth-child(2) {
+    flex-grow: 2;
+}
+
+.d-flex-11 .box:nth-child(3) {
+    flex-grow: 3;
+}
+
+.d-flex-12 {
+    display: flex;
+    gap: 2rem;
+}
+
+.d-flex-12 .box {
+    flex-grow: 1;
+    flex-basis: 300px;
+}
+
+.d-flex-12 .box:nth-child(3) {
+    flex-shrink: 2;
+}
+
+.d-flex-13 {
+    display: flex;
+}
+
+.d-flex-13 .box {
+    flex: 1 1 33.3%
+}
