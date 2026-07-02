@@ -1,0 +1,35 @@
+ul > li:first-of-type {
+    color: red;
+}
+
+ul > li:first-child {
+    color: red;
+}
+
+ul > li:nth-child(3) {
+    color: red;
+}
+
+ul > li:last-of-type {
+    color: blue;
+}
+
+ul > li:last-child {
+    color: rgb(232, 187, 8);
+}
+
+ul li:nth-child(2n + 1) {
+    border: 2px solid red;
+}
+
+ul li:nth-child(odd) {
+    border: 2px solid red;
+}
+
+ul li:nth-child(even) {
+    border: 2px solid black;
+}
+
+ul li:nth-child(3n + 1) {
+    color: aqua;
+}

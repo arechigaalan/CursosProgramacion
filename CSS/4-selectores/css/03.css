@@ -1,0 +1,15 @@
+.texto {
+    background-color: red;
+}
+
+.azul {
+    color: blue;
+}
+
+.mayusculas {
+    text-transform: uppercase;
+}
+
+.texto.azul { /*! Selccionar el elemento que contenga al menos estas dos clases. NO HAY que dejar espacio entre clase.*/
+    font-size: 10rem;
+}

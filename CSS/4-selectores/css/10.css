@@ -1,0 +1,14 @@
+/*! Que sean exáctamente igual que href especificado*/
+a[href="http://www.google.com"] {
+    color: red;
+}
+
+/*! Inicien con http*/
+a[href^="http"] {
+    color: red;
+}
+
+/*! Finalicen con http*/
+a[href$=".com"] {
+    color: red;
+}
