@@ -1,7 +1,8 @@
 from tkinter import *
 from tkinter import messagebox
 from random import randint, choice, shuffle
-import pyperclip 
+import pyperclip
+import json
 
 FONT = ('Arial', 14, 'normal')
 LETTERS = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
@@ -30,17 +31,32 @@ def generate_password():
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 
 def save():
-    website = input_website.get()
+    website = input_website.get().capitalize()
     username = input_username.get()
     password = input_password.get()
+    new_data = {website: {
+        'username': username,
+        'password': password
+    }}
+
     if check_data(website, username, password):
-        is_ok = messagebox.askokcancel(title='website', message=f'These are the details entered: \nUsername: {username} '
+        is_ok = messagebox.askokcancel(title=f'{website}', message=f'These are the details entered: \nUsername: {username} '
                                     f'\nPassword: {password} \nIs it ok to save?')
         if is_ok:
-            data = f'{website} | {username} | {password}\n'
-            with open('data.txt', mode='a') as data_txt:
-                data_txt.write(data)
-            clear_data()
+            try:
+                with open('data.json', mode='r') as data_file:
+                    #! Cargar todo el json.
+                    data = json.load(data_file)
+                    #! Agregar nuevas credenciales al diccionario.
+                    data.update(new_data)
+            except FileNotFoundError:
+                with open('data.json', mode='w') as data_file:
+                    json.dump(new_data, data_file, indent=4)
+            else:
+                with open('data.json', mode='w') as data_file:
+                    json.dump(data, data_file, indent=4)
+            finally:
+                clear_data()
     else:
         messagebox.showerror(title='Oops', message='Please don\'t leave any fields empty!')
 
@@ -53,6 +69,24 @@ def clear_data():
     input_website.delete(first=0, last=END)
     input_password.delete(first=0, last=END)
 
+def search():
+    website = input_website.get().capitalize()
+    if website: 
+        try:
+            with open('data.json', 'r') as data:
+                dict = json.load(data)
+        except FileNotFoundError:
+            messagebox.showerror(title='Oops', message=f'No data file found.')
+        else:
+            try:
+                username = dict[website]['username']
+                password = dict[website]['password']
+            except KeyError:
+                messagebox.showerror(title='Oops', message=f'There are not credentials for {website}')
+            else:
+                messagebox.showinfo(title=f'{website}', message=f'Username: {username}\nPassword: {password}')
+    else:
+        messagebox.showerror(title='Oops', message='Please don\'t leave the website field empty!')
 # ---------------------------- UI SETUP ------------------------------- #
 
 window = Tk()
@@ -67,9 +101,12 @@ canvas.grid(column=2, row=1)
 label_website = Label(text='Website:', font=FONT)
 label_website.grid(column=1, row=2)
 
-input_website = Entry(width=51)
+input_website = Entry(width=33)
 input_website.focus()
-input_website.grid(column=2, row=2, columnspan=2)
+input_website.grid(column=2, row=2)
+
+search_button = Button(text='Search',border=0.4, command=search)
+search_button.grid(column=3, row=2)
 
 label_username = Label(text='Email/Username:', font=FONT)
 label_username.grid(column=1, row=3)
